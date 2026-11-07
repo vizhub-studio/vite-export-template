@@ -4,13 +4,25 @@ Vite for VizHub exports
 
 If you are using VizHub with [hot reloading](https://vizhub.com/forum/t/hot-reloading-and-interactive-widgets/968), you can use this template to "eject" out of VizHub and develop locally.
 
-[![image](https://github.com/vizhub-core/vite-export-template/assets/68416/8e6c3e96-d7d5-4fcb-bb7e-64c57a814bee)](https://vizhub.com/curran/b4a29bfa02bd42c3acb44789a39cfb7b)
+[![image](https://github.com/vizhub-studio/vite-export-template/assets/68416/8e6c3e96-d7d5-4fcb-bb7e-64c57a814bee)](https://vizhub.com/curran/b4a29bfa02bd42c3acb44789a39cfb7b)
 
 The example viz that is exported here is [Parallel Coordinates Brushing Prototype](https://vizhub.com/curran/b4a29bfa02bd42c3acb44789a39cfb7b). This example was chosen because it leverages the following features of VizHub that need to be reproduced using Vite and NPM workspaces:
 
  * Importing across vizzes/packages (e.g. `import { observeResize } from '@curran/responsive-axes';`)
  * Importing from CSV files (e.g. `import data from './data.csv';`)
  * Responsiveness by measuring the parent `div` with ResizeObserver
+
+## Current usage and legacy export warning
+
+This repository is an **earlier VizHub-to-Vite export experiment**, not the canonical setup for the current VizHub application. Root scripts delegate local development to [`vite-app/`](vite-app/) and store export assets under [`vizhub-exports/`](vizhub-exports/).
+
+```bash
+npm ci
+npm run dev
+npm run build
+```
+
+**Do not run `npm run vizhub-pull` without inspecting it first.** It invokes `rm -rf vizhub-exports`, downloads from a hard-coded legacy `vizhub.com/api/export-viz/...` URL, then extracts a ZIP. That endpoint may have changed after the 2026 product cutover, and the script **deletes the local export directory**. Back up any modified files, check the intended host/API, and validate downloaded content before extracting. This repository records a historical workflow; the current product does not guarantee compatibility with that old export URL.
 
 ## Usage
 
